@@ -67,20 +67,36 @@ window.setTimeout(function () {
         /* Check if the decoded URL is valid */
         if (urlHashDecode) {
           // Construct the new URL
-          var newURL = "https://up.v040v.com/p/blog-page_5.html?url=" + encodeURIComponent(urlHashDecode);
+// Declare a variable to track which link is currently being used
+var currentLink = 0;
 
-          // Redirect the user to the new URL
-          window.location.href = newURL;
-        } else {
-          alert('hash invalid');
-        }
+// Define the two links in an array
+var links = [
+  "https://up.v040v.com/p/blog-page_5.html?url=",
+  "https://example.com/anotherLink.html?url=" // Replace this with your second link
+];
 
-      });
+// Assuming there's some delta variable and a function or code before this that sets the 'urlHashDecode'
+var delta = 500; // Example value, replace with your actual value if different
 
-    }
+setTimeout(function() {
+  // Your existing code...
 
-  }, delta);
-}, 500);
+  // Construct the new URL
+  var newURL = links[currentLink] + encodeURIComponent(urlHashDecode);
+
+  // Toggle the currentLink for next time
+  currentLink = 1 - currentLink; // This will flip the value between 0 and 1
+
+  // Redirect the user to the new URL
+  window.location.href = newURL;
+
+  // Rest of your existing code...
+  if (/* some condition */) { // You should replace the condition placeholder with your actual condition.
+    alert('hash invalid');
+  }
+
+}, delta);
 
 window.onblur = function () {
   window.blurred = true;
